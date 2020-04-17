@@ -225,6 +225,7 @@ let appData = {
             incomeItem = document.querySelectorAll('.income-items');
             incomeAddLineButton.style.display = 'block';
         }
+        rangeInput.value = 1;
        this.income = {};
        this.addIncome = [];
        this.incomeMonth = 0;
@@ -237,6 +238,7 @@ let appData = {
        this.budgetDay = 0;
        this.budgetMonth = 0;
        this.expensesMonth = 0;
+       this.changeNumber();
        inputsClear = document.querySelectorAll('input[type=text]');
        inputsClear.forEach(function (item) {
         item.value = '';       
@@ -246,7 +248,7 @@ let appData = {
 appData.closeButton();
 
 calcButton.addEventListener("click", appData.start.bind(appData));
-cancel.addEventListener("click", appData.reset);
+cancel.addEventListener("click", appData.reset.bind(appData));
 salaryAmountInput.addEventListener("input", appData.closeButton);
 expensesAddLineButton.addEventListener("click", appData.addExpensesBlock);
 incomeAddLineButton.addEventListener("click", appData.addIncomeBlock);
