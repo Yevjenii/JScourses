@@ -9,15 +9,9 @@ const amount0 = prompt('Во сколько это обойдется?');
 const expenses1 = prompt('Введите обязательную статью расходов?');
 const amount1 = prompt('Во сколько это обойдется?');
 const budgetMonth = money - amount0 - amount1;
-let period;
-let budgetDay = money/30;
-let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-
-
-period = Math.ceil(mission/budgetMonth);
-budgetDay = Math.floor(budgetMonth/30);
-addExpenses = addExpenses.toLowerCase();
-addExpenses = addExpenses.split(',');
+const period = Math.ceil(mission/budgetMonth);
+const budgetDay = Math.floor(budgetMonth/30);
+const addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
 
 console.log(" Type of variable 'money': " + typeof(money)+ "\n",
             "Type of variable 'income': " + typeof(income)+ "\n",
@@ -29,17 +23,15 @@ console.log(" Type of variable 'money': " + typeof(money)+ "\n",
             "Бюджет на месяц:", budgetMonth+ "\n",
             "Цель будет достигнута за " + period + " месяцев.\n",
             "Дневной бюджет: " + budgetDay + "грн.\n",
-            "Массив:" + addExpenses+ "\n");
+            "Массив:" + addExpenses.toLowerCase().split(',') + "\n");
 
-if(budgetDay>=1200) {
+if(budgetDay >= 1200) {
 console.log('У Вас высокий уровень дохода.');
-}
-else if(budgetDay>=600 && budgetDay<=1199) {
+} else if(budgetDay >= 600) {
 console.log('У Вас средний уровень дохода.');
-}
-else if(budgetDay>=0 && budgetDay<=599) {
+} else if(budgetDay >= 0) {
 console.log('К сожалению, у Вас уровень дохода ниже среднего.');
-}
-else {
+} else {
 console.log('Что-то пошло не так! :(');   
 }
+
