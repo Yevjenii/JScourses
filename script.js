@@ -42,7 +42,6 @@ console.log(" Type of variable 'money': " + typeof(money)+ "\n",
             "Дневной бюджет: " + budgetDay + "грн.\n",
             "Массив:" + addExpenses.toLowerCase().split(',') + "\n",
             "Общая сумма расходов за месяц:", getExpensesMonth() + "\n");
-
             
 const getStatusIncome = function () {
     if(budgetDay >= 1200) {
