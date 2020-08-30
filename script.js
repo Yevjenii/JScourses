@@ -3,24 +3,17 @@
 const isNumber = function (num) {
     return !isNaN(parseFloat(num)) && isFinite(num);
 };
+
 const start = function () {
     let tempMoney = 0;
     do{
-    tempMoney = prompt('Ваш месячный доход?');
+        tempMoney = prompt('Ваш месячный доход?');
     }while (!isNumber(tempMoney));
     return tempMoney; 
 };
 const money = Number(start());
-/*const income = 'Tutoring';
-const deposit = confirm('Есть ли у вас депозит в банке?');
-const mission = 30000;
-const expensesMonth = getExpensesMonth();
-const addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-const accumulatedMonth = getAccumulatedMonth();
-const period = Math.ceil(mission/accumulatedMonth);
-const budgetDay =  Math.floor(accumulatedMonth/30);
-*/
-let appData = {
+
+const appData = {
     income : {},
     addIncome : [],
     expences : {},
@@ -28,13 +21,17 @@ let appData = {
     deposit : false,
     mission : 40000,
     period : 0,
+    budget : +money,
+    budgetDay : 0,
+    budgetMonth : 0,
+    expensesMonth : 0,
     asking : function() {
-        let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+        const addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
         appData.addExpenses = addExpenses.toLowerCase().split(',');
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         let summ;
         for(let i =0; i<2; i++) {
-            let temp = prompt('Введите обязательную статью расходов?');
+            const temp = prompt('Введите обязательную статью расходов?');
             do{
                 summ = prompt('Во сколько это обойдется?');
             }while(!isNumber(summ));
@@ -42,12 +39,8 @@ let appData = {
         }
     console.log(appData.expences);        
     },
-    budget : +money,
-    budgetDay : 0,
-    budgetMonth : 0,
-    expensesMonth : 0,
     getExpensesMonth : function () {
-        for (const key in appData.expences) {
+        for (let key in appData.expences) {
             appData.expensesMonth += appData.expences[key];         
             }        
         console.log(appData.expensesMonth);
@@ -71,6 +64,7 @@ let appData = {
         } 
     },
     outLog : function() {
+        console.log("Наша программа включает в себя данные:",);
         for (let key in appData) { 
             console.log( "Ключ: " + key + " значение: " + appData[key] );
           }
