@@ -6,12 +6,29 @@ const isNumber = function (num) {
 
 const start = function () {
     let tempMoney = 0;
-    do{
-        tempMoney = prompt('Ваш месячный доход?');
-    }while (!isNumber(tempMoney));
+        do{
+            tempMoney = prompt('Ваш месячный доход?');
+        }while (!isNumber(tempMoney));
     return tempMoney; 
 };
 const money = Number(start());
+
+function askNumber(message, errorMessage) {
+    let text = '',
+        number = 0;
+    while (number <= 0){
+        text = prompt(message, '');
+        if (!isNaN(parseFloat(text) && isFinite(text))) {
+            number = parseInt(text);
+        }
+        message = errorMessage;
+      }
+      return number;
+  } 
+
+  const isString = function(line){
+    return isNaN(parseFloat(line)) && line !== '';
+  };
 
 const appData = {
     income : {},
@@ -25,23 +42,38 @@ const appData = {
     budgetDay : 0,
     budgetMonth : 0,
     expensesMonth : 0,
+    percentDeposit : 0,
+    moneyDeposit : 0,
     asking : function() {
-        const addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+        if(confirm('Есть ли у вас дополнительный источник дохода?')) {
+            let itemIncome = prompt('Какой у Вас дополнительный зароботок?', 'Фриланс');
+            while (!isString(itemIncome)){
+                itemIncome = prompt('ошибка! Введите дополнительный источник заробoтка!');
+            }
+            let cashIncome = askNumber('Какой доход это приносит? ', 'Ошибка, нужно ввести число!');
+            appData.income[itemIncome] = cashIncome;
+        }
+        let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
         appData.addExpenses = addExpenses.toLowerCase().split(',');
+        while (!isString(addExpenses)) {
+            addExpenses = prompt('ошибка! Введите дополнительные расходы!');
+        }
+        appData.addExpenses = addExpenses.split(' ').map(word => word[0].toUpperCase(addExpenses) + word.substring(1)).join(' ');
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         let summ;
         for(let i =0; i<2; i++) {
-            const temp = prompt('Введите обязательную статью расходов?');
-            do{
-                summ = prompt('Во сколько это обойдется?');
-            }while(!isNumber(summ));
+            let temp = prompt('Введите обязательную статью расходов?');
+            while (!isString(temp)){
+                temp = prompt('ошибка! Введите статью расходов!');
+            }            
+            summ = askNumber('Во сколько обойдется?', 'Ошибка, нужно ввести число!');
             appData.expences[temp]=Number(summ);
         }
     console.log(appData.expences);        
     },
     getExpensesMonth : function () {
         for (let key in appData.expences) {
-            appData.expensesMonth += appData.expences[key];         
+                appData.expensesMonth += appData.expences[key];         
             }        
         console.log(appData.expensesMonth);
     },
@@ -63,11 +95,17 @@ const appData = {
             console.log('Что-то пошло не так! :(');   
         } 
     },
+    getInfoDeposit : function () {
+        if(appData.deposit) {
+            appData.percentDeposit = askNumber('Какой годовой процент,');
+            appData.moneyDeposit = askNumber('Какая сумма заложена?,');
+        }
+    },
     outLog : function() {
         console.log("Наша программа включает в себя данные:",);
         for (let key in appData) { 
             console.log( "Ключ: " + key + " значение: " + appData[key] );
-          }
+        }
     }
 };
 appData.asking();
@@ -86,3 +124,16 @@ else {
 }
 console.log("Дневной бюджет: " + appData.budgetDay + "грн.");
 appData.outLog();
+
+
+
+
+    
+
+
+
+        
+ 
+    
+    
+    
