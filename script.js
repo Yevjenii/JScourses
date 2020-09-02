@@ -27,7 +27,7 @@ function askNumber(message, errorMessage) {
   } 
 
   const isString = function(line){
-    return isNaN(parseFloat(line)) && line !== '';
+    return isNaN(parseFloat(line)) && line !== '' && line !== null;
   };
 
 const appData = {
@@ -54,10 +54,10 @@ const appData = {
             appData.income[itemIncome] = cashIncome;
         }
         let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-        appData.addExpenses = addExpenses.toLowerCase().split(',');
         while (!isString(addExpenses)) {
             addExpenses = prompt('ошибка! Введите дополнительные расходы!');
         }
+        appData.addExpenses = addExpenses.toLowerCase().split(',');
         appData.addExpenses = addExpenses.split(' ').map(word => word[0].toUpperCase(addExpenses) + word.substring(1)).join(' ');
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         let summ;
