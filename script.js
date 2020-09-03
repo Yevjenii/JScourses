@@ -188,7 +188,6 @@ const appData = {
                 buttonCalculate.removeAttribute('disabled');
             }                
     }
-    
 };
 appData.closeButton();
 buttonCalculate.addEventListener("click", appData.start);
