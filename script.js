@@ -19,12 +19,12 @@ const inputDepositAmount = document.querySelector('.deposit-amount');
 const selectDepositBank = document.querySelector('.deposit-bank');
 const inputAdditionalExpensesItem = document.querySelector('.additional_expenses-item');
 const buttonExpensesAdd = document.querySelector('.expenses_add');
-const expensesItem =document.querySelectorAll('.expenses-items');
+let expensesItem =document.querySelectorAll('.expenses-items');
 const inputExpensesTitle = document.querySelector('.expenses-title');
 const inputIncomeAmount = document.querySelector('.income-amount');
 const inputIncomeTitle = document.querySelector('.income-title');
 const inputSalaryAmount = document.querySelector('.salary-amount');
-const incomeItem = document.querySelectorAll('.income-items');
+let incomeItem = document.querySelectorAll('.income-items');
 const periodAmount = document.querySelector('.period-amount');
 
 function askNumber(message, errorMessage) {
@@ -163,7 +163,7 @@ const appData = {
         return appData.budgetMonth * Number(inputRange.value);
     },
     addExpensesBlock: function () {
-        let cloneExpensesItem = expensesItem[0].cloneNode(true);
+        const cloneExpensesItem = expensesItem[0].cloneNode(true);
         expensesItem[0].parentNode.insertBefore(cloneExpensesItem, buttonAddExpPlus);
         expensesItem = document.querySelectorAll('.expenses-items');
         if(expensesItem.length === 3) {
@@ -171,7 +171,7 @@ const appData = {
         }
     },
     addIncomeBlock: function () {
-        let cloneIncomeItem = incomeItem[0].cloneNode(true);
+        const cloneIncomeItem = incomeItem[0].cloneNode(true);
         incomeItem[0].parentNode.insertBefore(cloneIncomeItem, buttonIncomeExpPlus);
         incomeItem = document.querySelectorAll('.income-items');
         if(incomeItem.length === 3) {
